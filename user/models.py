@@ -5,7 +5,7 @@ class User(AbstractUser):
 
 	"""
 	
-	Custom User Model...
+	Custom User Model
 
 	"""
 
