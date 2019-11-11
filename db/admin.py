@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import Database
 
-# Register your models here.
+class DatabaseAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Database, DatabaseAdmin)
+
