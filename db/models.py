@@ -2,9 +2,7 @@ from django.db import models
 
 class Database(models.Model):
 
-<<<<<<< HEAD
-	pass
-=======
+
 	id = models.IntegerField('id',unique=True, db_index=True, primary_key = True)
 	barcode = models.CharField('barcode',max_length=10,null=True,blank=True)
 	acc_no = models.CharField('accession number',max_length=10,null=True,blank=True)	
@@ -20,4 +18,4 @@ class Database(models.Model):
 		return self.barcode
 
 	
->>>>>>> 943a41477ba2d96432f8ac9dd9769b6da570d4a9
+
