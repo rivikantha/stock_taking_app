@@ -1,12 +1,44 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.views.generic import View
+from .forms import StockTakingForm
+from .models import StockEntry
+from django.http import HttpResponseRedirect
 
 class StockTake(View):
-
-	@login_required
+	
 	def get(self,request):
 
-		return render(request, 'user/stock_take.html')
+		params = {}
+
+		form = StockTakingForm()
+
+		params['form'] = form
+
+		return render(request, 'user/stock_take.html', params)
+
+	def post(self,request):
+
+		form = StockTakingForm(request.POST)
+
+		if form.is_valid():
+
+			stock_entry = StockEntry(
+
+					user = request.user,
+
+					barcode = form.cleaned_data['barcode'],
+
+					staus = form.cleaned_data['staus'],
+
+					remarks = form.cleaned_data['remarks']
+
+				)
+
+			stock_entry.save()
+
+			return HttpResponseRedirect('stock_entry/')
+
+			
 
 
 
