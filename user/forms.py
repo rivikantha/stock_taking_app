@@ -11,6 +11,6 @@ class StockTakingForm(forms.Form):
 	]
 
 	barcode = forms.CharField(label="Barcode", max_length=10)
-	staus = forms.ChoiceField(choices=STATUS, required=False)
+	status = forms.ChoiceField(choices=STATUS, required=False)
 	remarks = forms.CharField(label="remarks", widget=forms.Textarea(attrs={'rows': 1,'cols': 85}), max_length=750, required=False)
 

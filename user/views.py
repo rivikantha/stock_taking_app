@@ -28,7 +28,7 @@ class StockTake(View):
 
 					barcode = form.cleaned_data['barcode'],
 
-					staus = form.cleaned_data['staus'],
+					status = form.cleaned_data['status'],
 
 					remarks = form.cleaned_data['remarks']
 
