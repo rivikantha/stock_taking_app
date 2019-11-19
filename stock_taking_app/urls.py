@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf.urls import include
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 from db.views import Index
+from user.views import StockTake
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",Index.as_view()),
     path('',include('django.contrib.auth.urls')),
+    path('stock_take/',login_required(StockTake.as_view()))
 ]
