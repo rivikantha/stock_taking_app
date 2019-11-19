@@ -21,7 +21,7 @@ class StockEntry(models.Model):
 	id = models.AutoField(primary_key=True)
 	barcode = models.CharField('barcode',max_length=10)
 	status = models.CharField('status',max_length=1, choices=STATUS,null=True)
-	user = models.OneToOneField(User,on_delete=models.CASCADE,null=True, default="")
+	user = models.ForeignKey(User,on_delete=models.CASCADE,null=True, default="")
 	remarks = models.TextField('Remarks',null=True)
 
 
