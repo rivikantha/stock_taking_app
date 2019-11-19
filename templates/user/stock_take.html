@@ -2,6 +2,15 @@
 
 {% block content %}
 	
-	
+	<form method="POST" action="">
+
+		{% csrf_token %}
+		{{ form.text.errors }}
+		{{ form }}
+
+		<input type="submit" value="Make Entry" />
+
+	</form>
+		
 
 {% endblock %}
