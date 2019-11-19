@@ -7,9 +7,13 @@ from django.http import HttpResponseRedirect
 
 class StockTake(View):
 	
-	def get(self,request):
-		
+	def get(self,request,barcode=''):
+
 		params = {}
+
+		entries_so_far = StockEntry.objects.filter(user=request.user).order_by('-id')[:5]	
+
+		params['entries'] = reversed(entries_so_far)	
 
 		form = StockTakingForm()
 
@@ -37,7 +41,7 @@ class StockTake(View):
 
 			stock_entry.save()
 
-			return HttpResponseRedirect('stock_entry/')
+			return HttpResponseRedirect('/stock_take/'+ form.cleaned_data['barcode'])
 
 			
 

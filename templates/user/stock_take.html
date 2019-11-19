@@ -1,6 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+	<h3>Entries so far</h3>
+
+	<table>
+
+	<tr>
+		<th>barcode</th>
+		<th>status</th>
+		<th>remarks</th>
+	</tr>
+
+	{% for stock_entry in entries %}
+
+		<tr>
+
+			<td>{{stock_entry.barcode}}</td>
+			<td>{{stock_entry.status}}</td>
+			<td>{{stock_entry.remarks}}</td>
+
+		</tr>
+
+	{% endfor %}
+
+	</table>
 	
 	<form method="POST" action="">
 

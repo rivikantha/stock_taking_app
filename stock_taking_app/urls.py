@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.conf.urls import include
-from django.urls import path
+from django.urls import path,re_path
 from django.contrib.auth.decorators import login_required
 from db.views import Index
 from user.views import StockTake
@@ -25,7 +25,6 @@ from user.views import StockTake
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",Index.as_view()),
-    path('',include('django.contrib.auth.urls')),
-    path('stock_take/', login_required(StockTake.as_view()))
-
+    path('',include('django.contrib.auth.urls')),    
+    re_path(r'^stock_take/\w*/*$',login_required(StockTake.as_view()))
 ]
