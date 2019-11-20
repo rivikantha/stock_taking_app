@@ -4,9 +4,10 @@ class StockTakingForm(forms.Form):
 
 	STATUS = [
 	
+		('N', 'Normal'),
 		('D', 'Duplicate'),
 		('O', 'Other'),
-		('M', 'Missmatch'),
+		('M', 'Missmatch')
 	    
 	]
 

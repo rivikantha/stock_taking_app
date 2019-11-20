@@ -15,7 +15,7 @@ class StockTake(View):
 
 		params['entries'] = reversed(entries_so_far)	
 
-		form = StockTakingForm()
+		form = StockTakingForm(initial={'status': 'N'})
 
 		params['form'] = form
 
