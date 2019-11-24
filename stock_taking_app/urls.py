@@ -26,5 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",Index.as_view()),
     path('',include('django.contrib.auth.urls')),    
-    re_path(r'^stock_take/\w*/*$',login_required(StockTake.as_view()))
+    re_path(r'^stock_take/(\w*)/*$',login_required(StockTake.as_view())),   
 ]

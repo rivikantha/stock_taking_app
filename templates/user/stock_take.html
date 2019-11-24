@@ -2,31 +2,62 @@
 
 {% block content %}
 
-	<h3>Entries so far</h3>
+	<div id="entries-so-far">
 
-	<table>
+		<h3>Entries so far</h3>
 
-	<tr>
-		<th>barcode</th>
-		<th>status</th>
-		<th>remarks</th>
-	</tr>
-
-	{% for stock_entry in entries %}
+		<table>
 
 		<tr>
+			<th>barcode</th>
+			<th>status</th>
+			<th>remarks</th>
+		</tr>
+		
+		{% for stock_entry in entries %}
 
-			<td>{{stock_entry.barcode}}</td>
-			<td>{{stock_entry.status}}</td>
-			<td>{{stock_entry.remarks}}</td>
+			<tr>
 
+				<td>{{stock_entry.barcode}}</td>
+				<td>{{stock_entry.status}}</td>
+				<td>{{stock_entry.remarks}}</td>
+
+			</tr>
+
+		{% endfor %}
+
+		</table>
+
+	</div>
+
+	<div id="db-record">	
+		
+		<h3>Record Exist</h3>
+
+		<table>
+
+		<tr>
+			<th>barcode</th>
+			<th>title</th>
+			<th>author</th>
 		</tr>
 
-	{% endfor %}
+		{% for record in db_record %}
 
-	</table>
+			<tr>
+				<td>{{record.barcode}}</td>
+				<td>{{record.title}}</td>
+				<td>{{record.author}}</td>
+			</tr>
+
+		{% endfor %}		
+
+
+		</table>
+
+	</div>
 	
-	<form method="POST" action="">
+	<form method="POST" action="/stock_take/">
 
 		{% csrf_token %}
 		{{ form.text.errors }}

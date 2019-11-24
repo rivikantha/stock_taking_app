@@ -4,12 +4,28 @@ from pprint import pprint
 from .forms import StockTakingForm
 from .models import StockEntry
 from django.http import HttpResponseRedirect
+from db.models import Database
 
 class StockTake(View):
 	
-	def get(self,request,barcode=''):
+	def get(self,request,barcode):
 
-		params = {}
+		params = {}	
+
+		if(barcode != ''):
+
+			print('test pass')		
+
+			db_record = Database.objects.filter(barcode=barcode)
+
+			for record in db_record:
+
+				print(record.barcode)
+			
+			if(db_record):
+
+				params['db_record']=db_record
+
 
 		entries_so_far = StockEntry.objects.filter(user=request.user).order_by('-id')[:5]	
 
@@ -21,7 +37,7 @@ class StockTake(View):
 
 		return render(request, 'user/stock_take.html', params)
 
-	def post(self,request):
+	def post(self,request,barcode):
 
 		form = StockTakingForm(request.POST)
 
