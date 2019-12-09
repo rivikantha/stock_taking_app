@@ -3,7 +3,7 @@ from django.views.generic import View
 from pprint import pprint
 from .forms import StockTakingForm
 from .models import StockEntry
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect
 from db.models import Database
 
 class StockTake(View):
@@ -29,9 +29,17 @@ class StockTake(View):
 
 		entries_so_far = StockEntry.objects.filter(user=request.user).order_by('-id')[:5]	
 
-		params['entries'] = reversed(entries_so_far)	
+		params['entries'] = reversed(entries_so_far)
 
-		form = StockTakingForm(initial={'status': 'N'})
+		if 'shelf_no' not in request.session:
+
+			shelf_no = ""
+
+		else:
+
+			shelf_no = request.session['shelf_no']	
+
+		form = StockTakingForm(initial={'status': 'N','shelf_no':shelf_no})
 
 		params['form'] = form
 
@@ -51,13 +59,28 @@ class StockTake(View):
 
 					status = form.cleaned_data['status'],
 
+					shelf_no = form.cleaned_data['shelf_no'],
+
 					remarks = form.cleaned_data['remarks']
 
 				)
 
 			stock_entry.save()
 
+			request.session['shelf_no']	= form.cleaned_data['shelf_no']
+
 			return HttpResponseRedirect('/stock_take/'+ form.cleaned_data['barcode'])
+
+class EditStockEntry(View):
+
+	def get(self,request,id):
+
+		
+		return HttpResponse(id)
+
+
+
+
 
 			
 
