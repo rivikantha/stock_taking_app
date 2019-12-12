@@ -12,9 +12,7 @@ class StockTake(View):
 
 		params = {}	
 
-		if(barcode != ''):
-
-			print('test pass')		
+		if(barcode != ''):					
 
 			db_record = Database.objects.filter(barcode=barcode)
 
@@ -74,9 +72,28 @@ class StockTake(View):
 class EditStockEntry(View):
 
 	def get(self,request,id):
-
 		
-		return HttpResponse(id)
+
+		params={}
+
+		entries_so_far = StockEntry.objects.filter(user=request.user).order_by('-id')[:5]	
+
+		params['entries'] = reversed(entries_so_far)
+
+		stock_entry = StockEntry.objects.get(id=id)
+
+		data = {'id':id,
+				'barcode':stock_entry.barcode,
+				'status':stock_entry.status,
+				'remarks':stock_entry.remarks,
+				'shelf_no':stock_entry.shelf_no
+				}
+
+		form = StockTakingForm(data)		
+
+		params['form'] = form
+
+		return render(request, 'user/stock_take.html', params)
 
 
 
