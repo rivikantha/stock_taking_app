@@ -49,6 +49,24 @@ class StockTake(View):
 
 		if form.is_valid():
 
+			if(form.cleaned_data['is_update']):
+
+				id = form.cleaned_data['id']
+
+				stock_entry = StockEntry.objects.get(id=id)
+
+				stock_entry.barcode=form.cleaned_data['barcode']
+				stock_entry.status=form.cleaned_data['status']
+				stock_entry.shelf_no=form.cleaned_data['shelf_no']
+				stock_entry.remarks=form.cleaned_data['remarks']
+
+				stock_entry.save()
+
+				request.session['shelf_no']	= form.cleaned_data['shelf_no']
+
+				return HttpResponseRedirect('/stock_take/'+ form.cleaned_data['barcode'])
+
+
 			stock_entry = StockEntry(
 
 					user = request.user,
@@ -86,7 +104,8 @@ class EditStockEntry(View):
 				'barcode':stock_entry.barcode,
 				'status':stock_entry.status,
 				'remarks':stock_entry.remarks,
-				'shelf_no':stock_entry.shelf_no
+				'shelf_no':stock_entry.shelf_no,
+				'is_update':True
 				}
 
 		form = StockTakingForm(data)		
@@ -94,6 +113,16 @@ class EditStockEntry(View):
 		params['form'] = form
 
 		return render(request, 'user/stock_take.html', params)
+
+class DeleteStockEntry(View):
+
+	def get(self,request,id):
+
+		stock_entry = StockEntry.objects.get(id=id)
+
+		stock_entry.delete()
+
+		return HttpResponseRedirect('/stock_take/')
 
 
 

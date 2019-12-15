@@ -24,7 +24,8 @@
 				<td>{{stock_entry.status}}</td>
 				<td>{{stock_entry.remarks}}</td>
 				<td>{{stock_entry.shelf_no}}</td>
-				<td><a href="/edit_stock_entry/{{stock_entry.id}}">edit</a></td>
+				<td><a href="/edit_stock_entry/{{stock_entry.id}}">Edit</a></td>
+				<td><a href="/delete_stock_entry/{{stock_entry.id}}">Delete</a></td>
 			</tr>
 
 		{% endfor %}

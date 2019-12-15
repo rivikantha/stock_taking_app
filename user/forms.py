@@ -16,4 +16,4 @@ class StockTakingForm(forms.Form):
 	status = forms.ChoiceField(choices=STATUS, required=False)
 	remarks = forms.CharField(label="remarks", widget=forms.Textarea(attrs={'rows': 1,'cols': 85}), max_length=750, required=False)
 	shelf_no = forms.CharField(label="Shelf No", max_length=20)
-	is_edit
+	is_update = forms.BooleanField(widget=forms.HiddenInput(),required=False,initial=False)
