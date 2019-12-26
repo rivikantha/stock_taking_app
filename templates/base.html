@@ -11,15 +11,17 @@
 
 		<div class="container-fluid">
 
-			<div class="row" id="header">
+			<div class="row">
+				<div class="col-lg-1">
+					<img id="logo" src="{% static 'img/uni_crest.png' %}"/>
+					
 
-				<img id="logo" src="{% static 'img/uni_crest.png' %}"/>
+				</div>
 
-				<h1 id="app-name" >Library Network Stock Evaluation System</h1>			
-
+				<div class="col-lg-11">
+					<h1 id="app-name" >Library Network Stock Evaluation System</h1>
+				</div>
 			</div>
-
-			
 
 			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
@@ -33,6 +35,7 @@
 					{% block navbar %}
 					{% endblock %}
 				</ul>
+
 			</nav>
 
 			{% block content %}

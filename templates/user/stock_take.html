@@ -1,75 +1,112 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 
-	<div id="entries-so-far">
+	<div class="row">
 
-		<h3>Entries so far</h3>
+		<div class='col-lg-7'>
 
-		<table class="table">
+			<h4 class="mt-4">Entries so far</h4>			
 
-		<tr>
-			<th>barcode</th>
-			<th>status</th>
-			<th>remarks</th>
-			<th>self no</th>
-			<th></th>
-		</tr>
-		
-		{% for stock_entry in entries %}
+			<table class="table table-striped">			
 
 			<tr>
-
-				<td>{{stock_entry.barcode}}</td>
-				<td>{{stock_entry.status}}</td>
-				<td>{{stock_entry.remarks}}</td>
-				<td>{{stock_entry.shelf_no}}</td>
-				<td><a href="/edit_stock_entry/{{stock_entry.id}}">Edit</a></td>
-				<td><a href="/delete_stock_entry/{{stock_entry.id}}">Delete</a></td>
+				<th>barcode</th>
+				<th>status</th>
+				<th>remarks</th>
+				<th>self no</th>
+				<th></th>
+				<th></th>
 			</tr>
+			
+			{% for stock_entry in entries %}
 
-		{% endfor %}
+				<tr>
 
-		</table>
+					<td>{{stock_entry.barcode}}</td>
+					<td>{{stock_entry.status}}</td>
+					<td>{{stock_entry.remarks}}</td>
+					<td>{{stock_entry.shelf_no}}</td>
+					<td><a href="/edit_stock_entry/{{stock_entry.id}}">Edit</a></td>
+					<td><a href="/delete_stock_entry/{{stock_entry.id}}">Delete</a></td>
+				</tr>
 
-	</div>
+			{% endfor %}
 
-	<div id="db-record">	
-		
-		<h3>Record Exist</h3>
+			</table>
 
-		<table>
+		</div>
 
-		<tr>
-			<th>barcode</th>
-			<th>title</th>
-			<th>author</th>
-		</tr>
+		<div class="col-lg-5">	
+			
+			<h4 class="mt-4">Record Exist</h4>
 
-		{% for record in db_record %}
+			<table class="table table-striped">
 
 			<tr>
-				<td>{{record.barcode}}</td>
-				<td>{{record.title}}</td>
-				<td>{{record.author}}</td>
+				<th>barcode</th>
+				<th>title</th>
+				<th>author</th>
 			</tr>
 
-		{% endfor %}		
+			{% for record in db_record %}
+
+				<tr>
+					<td>{{record.barcode}}</td>
+					<td>{{record.title}}</td>
+					<td>{{record.author}}</td>
+				</tr>
+
+			{% endfor %}		
 
 
-		</table>
+			</table>
+		</div>	
 
-	</div>
-	
+	</div>	
+
 	<form method="POST" action="/stock_take/">
 
 		{% csrf_token %}
-		{{ form.text.errors }}
-		{{ form }}
 
-		<input type="submit" value="Make Entry" />
+		<div class="row">
+
+			<div class="col-lg-6">
+
+				<h4 class="mt-4">Stock entry form</h4>			
+				
+				{{ form.text.errors }}
+						
+				
+				<div class='row'>
+
+					<div class="col">
+						{{ form.barcode|as_crispy_field }}
+					</div>
+
+					<div class="col">
+						{{ form.status|as_crispy_field }}
+					</div>
+
+				</div>				
+
+				{{ form.remarks|as_crispy_field }}
+
+				{{ form.shelf_no|as_crispy_field }}
+					
+				<input type="submit" value="Make Entry" />
+
+			</div>				
+
+			
+
+		</div>
 
 	</form>
+
+	
 		
 
 {% endblock %}
