@@ -3,8 +3,9 @@ from django.views.generic import View
 from pprint import pprint
 from .forms import StockTakingForm
 from .models import StockEntry
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect,JsonResponse
 from db.models import Database
+from django.db.models import Count
 
 class StockTake(View):
 	
@@ -129,7 +130,13 @@ class Statistics(View):
 
 	def get(self,request):
 
+		data = StockEntry.objects.all().values('date').annotate(total=Count('date')).order_by('date')
+
+		pprint(data)
+
 		return render(request,'user/statistics.html')
+
+		#return JsonResponse(data)
 
 
 
