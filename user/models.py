@@ -24,5 +24,6 @@ class StockEntry(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE,null=True, default="")
 	shelf_no = models.CharField('shelf no',max_length=20)
 	remarks = models.TextField('Remarks',null=True)
+	date = models.DateField(auto_now=True)
 
 

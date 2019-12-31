@@ -125,6 +125,15 @@ class DeleteStockEntry(View):
 		return HttpResponseRedirect('/stock_take/')
 
 
+class Statistics(View):
+
+	def get(self,request):
+
+		return render(request,'user/statistics.html')
+
+
+
+
 
 
 

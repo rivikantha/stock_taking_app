@@ -20,7 +20,7 @@ from django.conf.urls import include
 from django.urls import path,re_path
 from django.contrib.auth.decorators import login_required
 from db.views import Index
-from user.views import StockTake,EditStockEntry,DeleteStockEntry
+from user.views import StockTake,EditStockEntry,DeleteStockEntry,Statistics
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +28,6 @@ urlpatterns = [
     path('',include('django.contrib.auth.urls')),    
     re_path(r'^stock_take/(\w*)/*$',login_required(StockTake.as_view())),
     re_path(r'^edit_stock_entry/(\w*)/*$',login_required(EditStockEntry.as_view())),
-    re_path(r'^delete_stock_entry/(\w*)/*$',login_required(DeleteStockEntry.as_view())),    
+    re_path(r'^delete_stock_entry/(\w*)/*$',login_required(DeleteStockEntry.as_view())),
+    path('statistics/',Statistics.as_view()),    
 ]
