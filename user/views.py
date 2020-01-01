@@ -128,15 +128,37 @@ class DeleteStockEntry(View):
 
 class Statistics(View):
 
+	def get(self,request):		
+
+		return render(request,'user/statistics.html')		
+
+
+class StatDaily(View):
+
 	def get(self,request):
 
-		data = StockEntry.objects.all().values('date').annotate(total=Count('date')).order_by('date')
+		results = StockEntry.objects.all().values('date').annotate(total=Count('date')).order_by('date')
 
-		pprint(data)
+		labels = []
+		data= []
 
-		return render(request,'user/statistics.html')
+		for result in results:
 
-		#return JsonResponse(data)
+			formatedDate = result['date'].strftime("%Y-%m-%d")
+			total = result['total']	
+
+			labels.append(formatedDate)
+			data.append(total)
+
+		param={
+
+			"labels":labels,
+			"chart_data":data,
+		}
+			
+		return JsonResponse(param,safe=False)
+
+
 
 
 
