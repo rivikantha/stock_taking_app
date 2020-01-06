@@ -12,6 +12,7 @@ class Database(models.Model):
 	classification = models.CharField('classification',max_length=10,null=True,blank=True)	
 	price = models.FloatField('price',blank=True)	
 	pub_year = models.CharField('publication year',max_length=10,null=True,blank=True)
+	edited = models.BooleanField('Edited',default=True)
 	
 
 	def __str__(self):

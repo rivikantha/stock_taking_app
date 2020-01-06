@@ -15,11 +15,7 @@ class StockTake(View):
 
 		if(barcode != ''):					
 
-			db_record = Database.objects.filter(barcode=barcode)
-
-			for record in db_record:
-
-				print(record.barcode)
+			db_record = Database.objects.get(barcode=barcode)			
 			
 			if(db_record):
 

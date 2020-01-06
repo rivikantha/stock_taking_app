@@ -19,7 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf.urls import include
 from django.urls import path,re_path
 from django.contrib.auth.decorators import login_required
-from db.views import Index
+from db.views import Index,EditRecord
 from user.views import StockTake,EditStockEntry,DeleteStockEntry,Statistics,StatDaily
 
 urlpatterns = [
@@ -30,5 +30,6 @@ urlpatterns = [
     re_path(r'^edit_stock_entry/(\w*)/*$',login_required(EditStockEntry.as_view())),
     re_path(r'^delete_stock_entry/(\w*)/*$',login_required(DeleteStockEntry.as_view())),
     path('statistics/',login_required(Statistics.as_view())),
-    path('stat_daily/',login_required(StatDaily.as_view())),     
+    path('stat_daily/',login_required(StatDaily.as_view())),
+    re_path(r'^edit_db_record/(\w*)/*$',login_required(EditRecord.as_view())),     
 ]

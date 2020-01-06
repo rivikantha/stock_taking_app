@@ -41,9 +41,13 @@
 
 		</div>
 
-		<div class="col-lg-5">	
+		<div class="col-lg-5">
+
+			{% if db_record %}	
 			
-			<h4 class="mt-4">Record Exist</h4>
+			<h4 class="mt-4">Record Exist <a href="/edit_db_record/{{db_record.id}}">Edit</a></h4>
+
+			{% endif %}
 
 			<table class="table table-striped">
 
@@ -53,18 +57,19 @@
 				<th>author</th>
 			</tr>
 
-			{% for record in db_record %}
+			
+			<tr>
+				<td>{{db_record.barcode}}</td>
+				<td>{{db_record.title}}</td>
+				<td>{{db_record.author}}</td>
+			</tr>
 
-				<tr>
-					<td>{{record.barcode}}</td>
-					<td>{{record.title}}</td>
-					<td>{{record.author}}</td>
-				</tr>
-
-			{% endfor %}		
+					
 
 
 			</table>
+
+			
 		</div>	
 
 	</div>	
