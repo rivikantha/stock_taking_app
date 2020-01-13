@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<form method="POST" action="/stock_take/">
+
+	{% csrf_token %}
+
+	<div class="row">
+
+		<div class="col-lg-6">
+
+			<h4 class="mt-4">Edit Record</h4>			
+			
+			{{ db_form.text.errors }}		
+
+			{{ db_form.title|as_crispy_field }}
+
+			{{ db_form.barcode|as_crispy_field }}				
+
+			{{ db_form.author|as_crispy_field }}
+
+			{{ db_form.loc|as_crispy_field }}
+				
+			<input type="submit" value="Edit Record" />
+
+		</div>
+
+	</div>
+
+</form>
+
+{% endblock %}
