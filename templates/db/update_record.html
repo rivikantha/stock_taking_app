@@ -5,7 +5,7 @@
 {% block content %}
 
 
-<form method="POST" action="/stock_take/">
+<form method="POST" action="/edit_db_record/">
 
 	{% csrf_token %}
 
@@ -17,13 +17,19 @@
 			
 			{{ db_form.text.errors }}		
 
-			{{ db_form.title|as_crispy_field }}
-
 			{{ db_form.barcode|as_crispy_field }}				
+
+			{{ db_form.title|as_crispy_field }}							
 
 			{{ db_form.author|as_crispy_field }}
 
 			{{ db_form.loc|as_crispy_field }}
+
+			{{ db_form.classification|as_crispy_field }}
+
+			{{ db_form.price|as_crispy_field }}
+
+			{{ db_form.pub_year|as_crispy_field }}
 				
 			<input type="submit" value="Edit Record" />
 

@@ -31,5 +31,6 @@ urlpatterns = [
     re_path(r'^delete_stock_entry/(\w*)/*$',login_required(DeleteStockEntry.as_view())),
     path('statistics/',login_required(Statistics.as_view())),
     path('stat_daily/',login_required(StatDaily.as_view())),
-    re_path(r'^edit_db_record/(\w*)/*$',login_required(EditRecord.as_view())),     
+    re_path(r'^edit_db_record_form/(\w*)/*$',login_required(EditRecord.as_view())),
+    path('edit_db_record/',login_required(EditRecord.as_view())),     
 ]
